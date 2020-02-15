@@ -36,9 +36,9 @@ const routes = [
         }
       },
       {
-        path:'serve',
-        name:'Serve',
-        component:() => import('../views/Serve.vue'),
+        path:'community',
+        name:'Community',
+        component:() => import('../views/Community.vue'),
         meta: {
           auth: true
         }
