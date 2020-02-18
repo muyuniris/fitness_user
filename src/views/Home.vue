@@ -1,7 +1,7 @@
 <template>
 <div>
   <router-view style="height:"></router-view>
-  <van-tabbar route  >
+  <van-tabbar route active-color="rgb(245, 176, 29)">
     <van-tabbar-item icon="home-o" replace to="/home">首页</van-tabbar-item>
     <van-tabbar-item icon="notes-o" replace to="/home/course">课程</van-tabbar-item>
     <van-tabbar-item icon="smile-comment-o" replace to="/home/community">社区</van-tabbar-item>
@@ -23,7 +23,4 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-h1{
-  color: red;
-}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="course">
-    <van-tabs v-model="active" sticky>
+    <van-tabs v-model="active" sticky color="rgb(245, 176, 29)">
       <van-tab title="课程">
         <van-sticky :offset-top="44">
           <div class="time">
@@ -95,6 +95,7 @@ export default {
   created(){
     this.courseList=[
       {
+        id:1,
         name:"美人瑜伽",
         img:"/img/img1.jpg",
         teacher:"张若昀",
@@ -105,6 +106,7 @@ export default {
         outTime:"07-30"
       },
       {
+        id:2,
         name:"美人瑜伽",
         img:"/img/img1.jpg",
         teacher:"张若昀",
@@ -115,6 +117,7 @@ export default {
         outTime:"07-30"
       },
       {
+        id:3,
         name:"美人瑜伽",
         img:"/img/img1.jpg",
         teacher:"张若昀",
@@ -125,6 +128,7 @@ export default {
         outTime:"07-30"
       },
       {
+        id:4,
         name:"美人瑜伽",
         img:"/img/img1.jpg",
         teacher:"张若昀",
@@ -135,6 +139,7 @@ export default {
         outTime:"07-30"
       },
       {
+        id:5,
         name:"美人瑜伽",
         img:"/img/img1.jpg",
         teacher:"张若昀",
@@ -145,6 +150,7 @@ export default {
         outTime:"07-30"
       },
       {
+        id:6,
         name:"美人瑜伽",
         img:"/img/img1.jpg",
         teacher:"张若昀",
@@ -190,7 +196,9 @@ export default {
   }
 };
 </script>
+
 <style lang="less" scoped>
+@import "../assets/less/base.less";
 .time {
   padding: 10px 0;
   display: flex;
@@ -209,8 +217,9 @@ export default {
   flex-direction: column;
 }
 .time-item.choosed {
-  border: 1px solid gray;
+  border: 1px solid @mainColor;
 }
+
 .course-list,
 .teacher-list {
   padding-bottom:50px;

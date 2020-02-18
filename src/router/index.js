@@ -50,6 +50,14 @@ const routes = [
         meta: {
           auth: true
         }
+      },
+      {
+        path:'courseDetail:id',
+        name:'CourseDetail',
+        component:() => import('../views/CourseDetail.vue'),
+        meta: {
+          auth: true
+        }
       }
     ]
   }
