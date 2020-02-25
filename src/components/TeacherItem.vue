@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="teacher-btn">
-      <van-button type="default" size="small">立即预约</van-button>
+      <van-button type="default" size="small" @click="order(date.id)" color="rgb(245, 176, 29)" plain>立即预约</van-button>
     </div>
   </div>
 </template>
@@ -25,6 +25,12 @@
 export default {
   props:{
     date:Object
+  },
+  methods:{
+   order(i){
+     console.log(i);
+     this.$router.push("/home/teacherDetail:"+this.date.id);
+   }
   }
 }
 </script>

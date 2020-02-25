@@ -19,10 +19,10 @@
       </div>
     </div>
     <div class="course-btn">
-      <van-button type="default" size="small" @click="order" color="rgb(245, 176, 29)">立即预约</van-button>
+      <van-button type="default" size="small" @click="order" color="rgb(245, 176, 29)" plain>立即预约</van-button>
     </div>
   </div>
-</template>
+</template> 
 <script>
 export default {
   props:{
@@ -39,7 +39,7 @@ export default {
 <style lang="less" scoped>
 @import "../assets/less/base.less";
 .course-item{
-  padding:10px;
+  padding:10px 0;
   border-top: 1px solid @lineColor; 
 }
 .course-item>div{
@@ -57,7 +57,7 @@ export default {
 
 .course-info{
   padding-left:5px;
-  width: 185px;
+  width: 195px;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -84,7 +84,7 @@ export default {
   width: 70px;
   height: 80px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 

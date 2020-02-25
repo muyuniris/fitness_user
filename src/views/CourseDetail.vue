@@ -6,13 +6,13 @@
         <div class="info">
           <div class="name">零基础背部塑型</div>
           <div class="rate">
-            K{{value}}
+            <span>K{{value}} </span>
             <van-rate
               v-model="value"
-              icon="star"
+              icon="fire"
               :size="16"
               color="#fff"
-              void-icon="star"
+              void-icon="fire"
               void-color="#96959B"
             />
           </div>
@@ -20,10 +20,24 @@
       </div>
     </div>
     <div class="course-info">
-      <div>时间：2月18日 07：00-07：30</div>
-      <div>地点：瑜伽室</div>
-      <div>名额：8个 剩余：2个</div>
-      <div>价格：20元</div>
+      <div>
+        <van-icon name="clock-o" />2月18日 07：00 - 07：30
+      </div>
+      <div>
+        <van-icon name="wap-home-o" />瑜伽室
+      </div>
+      <div>
+        <van-icon name="friends-o" />名额：8个 剩余：2个
+      </div>
+      <div>
+        <van-icon name="after-sale" />20元
+      </div>
+      <div class="location">
+        <van-icon name="location-o" />成都市龙泉驿区大面街道xxxxx
+        <a class="phone" href="tel:17311388039">
+          <van-icon name="phone" />
+        </a>
+      </div>
     </div>
     <div class="teacher">
       <div class="title">教练介绍</div>
@@ -43,9 +57,9 @@
     </div>
     <div class="course-des">
       <div class="title">课程介绍</div>
-      <div class="description">
-        的考生是否会看到回复客户收到开发计划的款式反馈收到回复客户收到付款饭后漱口多方核实尽快发货见客户首付款首付款是对回复开始疯狂撒金凤凰啊还是房卡就行
-      </div>
+      <div
+        class="description"
+      >的考生是否会看到回复客户收到开发计划的款式反馈收到回复客户收到付款饭后漱口多方核实尽快发货见客户首付款首付款是对回复开始疯狂撒金凤凰啊还是房卡就行</div>
     </div>
     <div class="order-btn">
       <van-button type="default">立即预约</van-button>
@@ -67,7 +81,7 @@ export default {
 @import "../assets/less/base.less";
 .courseDetail {
   min-height: 667px;
-  padding-bottom:50px; 
+  padding-bottom: 50px;
   background: @lineColor;
 }
 .banner {
@@ -105,8 +119,15 @@ export default {
       .rate {
         font-size: 16px;
         vertical-align: top;
-        line-height: 16px;
+        line-height: 20px;
+        height: 20px;
         padding: 5px;
+
+        .van-rate {
+          line-height: 20px;
+          vertical-align: middle;
+          height: 20px;
+        }
       }
     }
   }
@@ -114,8 +135,36 @@ export default {
 .course-info {
   padding: 10px;
   background: #fff;
+  .location {
+    border-top: 1px solid @lineColor;
+    margin-top: 10px;
+    padding-top: 10px;
+    .phone {
+      margin: 5px 0;
+      padding: 0  10px;
+      display: inline-block;
+      color: @mainColor;
+      float: right;
+      height: 20px;
+      border-left: 1px solid @lineColor;
+      .van-icon {
+        line-height: 20px;
+        height: 20px;
+        // padding: 5px;
+      }
+    }
+  }
   div {
     padding: 5px;
+    line-height: 30px;
+    height: 30px;
+    vertical-align: top;
+  }
+  .van-icon {
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    vertical-align: top;
   }
 }
 .teacher {
@@ -124,7 +173,7 @@ export default {
   background: #fff;
   .title {
     padding: 10px 0;
-    border-bottom:1px solid @lineColor;
+    border-bottom: 1px solid @lineColor;
   }
   .teacher-main {
     padding: 10px 0;
@@ -148,28 +197,28 @@ export default {
       height: 80px;
       display: flex;
       flex-direction: column;
-      justify-content:space-around;
+      justify-content: space-around;
       i {
         vertical-align: middle;
       }
     }
   }
 }
-.course-des{
+.course-des {
   padding: 0 15px;
   margin-top: 10px;
   background: white;
-  .title{
+  .title {
     padding: 10px 0;
     border-bottom: 1px solid @lineColor;
   }
-  .description{
+  .description {
     padding: 10px 0;
   }
 }
-.order-btn{
+.order-btn {
   margin-top: 10px;
-  button{
+  button {
     border: none;
     background: @mainColor;
     width: 100%;

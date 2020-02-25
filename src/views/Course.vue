@@ -17,7 +17,15 @@
           </div>
         </van-sticky>
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh"  class="course-list">
-          <CourseItem v-for="(item,index) in courseList" :key="index" :date="item"></CourseItem>
+            <van-list
+    v-model="loading"
+    :finished="finished"
+    finished-text="没有更多了"
+    @load="onLoad"
+  >
+    <CourseItem v-for="(item,index) in courseList" :key="index" :date="item"></CourseItem>
+  </van-list>
+          
         </van-pull-refresh>
       </van-tab>
       <van-tab title="私教">
@@ -163,30 +171,35 @@ export default {
     ],
     this.teacherList=[
       {
+        id:1,
         name:"张若昀",
         img:"/img/img2.jpg",
         rate:4,
         info:"暂无描述"
       },
       {
+        id:2,
         name:"张若昀",
         img:"/img/img2.jpg",
         rate:4,
         info:"暂无描述"
       },
       {
+        id:3,
         name:"张若昀",
         img:"/img/img2.jpg",
         rate:4,
         info:"暂无描述"
       },
       {
+        id:4,
         name:"张若昀",
         img:"/img/img2.jpg",
         rate:4,
         info:"暂无描述"
       },
       {
+        id:5,
         name:"张若昀",
         img:"/img/img2.jpg",
         rate:4,
