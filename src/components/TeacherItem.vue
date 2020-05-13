@@ -12,9 +12,6 @@
       <div class="teacher-rate">
         <van-rate v-model="date.rate" readonly size="14px"/>
       </div>
-      <div class="t-other">
-       {{date.info}}
-      </div>
     </div>
     <div class="teacher-btn">
       <van-button type="default" size="small" @click="order(date.id)" color="rgb(245, 176, 29)" plain>立即预约</van-button>
@@ -29,7 +26,7 @@ export default {
   methods:{
    order(i){
      console.log(i);
-     this.$router.push("/home/teacherDetail:"+this.date.id);
+     this.$router.push("/home/teacherDetail/"+this.date.id);
    }
   }
 }
@@ -59,7 +56,7 @@ export default {
   height: 80px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   i{
     vertical-align: middle;
   }

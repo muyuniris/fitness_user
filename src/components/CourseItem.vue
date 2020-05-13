@@ -15,7 +15,7 @@
       <div class="course-other">
         <van-icon name="location-o" />{{date.location}}
         <van-icon name="manager-o" />{{date.teacher}}
-        <van-icon name="friends-o" />剩{{date.maxpeople-date.count}}个名额
+        <van-icon name="friends-o" />剩{{date.max-date.count}}个名额
       </div>
     </div>
     <div class="course-btn">
@@ -31,7 +31,7 @@ export default {
   methods:{
     order(){
       console.log("order")
-      this.$router.push("/home/courseDetail:"+this.date.id);
+      this.$router.push("/home/courseDetail/"+this.date.id);
     }
   }
 }
@@ -50,8 +50,10 @@ export default {
   height: 80px;
   border-radius: 10px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
   img{
-    width: 100%;
+    height: 100%;
   }
 }
 
@@ -87,5 +89,6 @@ export default {
   justify-content: flex-end;
   align-items: center;
 }
+
 
 </style>

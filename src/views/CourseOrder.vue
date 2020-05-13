@@ -8,7 +8,7 @@
       @click-left="back"
     />
     <div class="banner">
-      <img :src="this.$store.state.ip+data.c_img" alt />
+      <img :src="data.c_img" alt />
       <div class="banner-info">
         <div class="info">
           <div class="name">{{data.c_name}}</div>
@@ -21,7 +21,6 @@
               color="#fff"
               void-icon="fire"
               void-color="#96959B"
-              readonly
             />
           </div>
         </div>
@@ -32,7 +31,7 @@
         <van-icon name="clock-o" />{{switchTimeFormat(data.cp_time)}}
       </div>
       <div>
-        <van-icon name="wap-home-o" />{{data.p_name||'暂无'}}
+        <van-icon name="wap-home-o" />{{data.p_name}}
       </div>
       <div>
         <van-icon name="friends-o" />名额：{{data.cp_max}}个 剩余：{{data.cp_max-data.cp_count}}个
@@ -52,7 +51,7 @@
       <div class="teacher-main clearfix" @click="showTeacher">
         <div>
           <div class="avtor">
-            <img :src="this.$store.state.ip+data.t_img" alt />
+            <img :src="data.t_img" alt />
           </div>
         </div>
         <div class="teacher-info">
@@ -70,7 +69,8 @@
       >{{data.c_info?data.c_info:'暂无'}}</div>
     </div>
     <div class="order-btn">
-      <van-button type="default" @click="order">立即预约</van-button>
+      <van-button type="default" @click="del" v-show="data.state=='1'">取消预约</van-button>
+      <van-button type="default" @click="rate" v-show="data.state=='0'">评价教练</van-button>
     </div>
   </div>
 </template>
@@ -85,81 +85,25 @@ export default {
     };
   },
   methods:{
-    order(){
-      var uid = sessionStorage.getItem("uid");
-      this.axios.post('/order/selectCourse',{  //查询是否预约过
-        uid:uid,
-        cpid:this.$route.params.id
+    del(){
+      var id = sessionStorage.getItem("uid");
+      Dialog.confirm({
+        title:'取消预约',
+        message: '取消预约会收取课程价格10%的手续费，余下金额将退还账户，请确认是否继续？'
       })
-      .then(res=>{
-        if(res.data.code=="200"){
-
-          // 查询余额是否充足
-          this.axios.post("/vip/getMoney",{
-            id:uid
-          })
-          .then(res=>{
-            console.log(res.data);
-            if(res.data.code=='200'){
-              var money = res.data.data;
-              if(money<this.data.cp_price){
-                Dialog.confirm({
-                  title:'余额不足',
-                  message: '你的账户余额已不足 '+this.data.cp_price+" F币,是否前往充值？"
-                })
-                .then(() => {
-                  this.$router.push({path:'/home/money'});
-                })
-                .catch(() => {
-                });
-              }
-
-              // 余额充足
-              else{
-                Dialog.confirm({
-                  title: '确认支付',
-                  message: '该操作将从你的账户中扣除 '+this.data.cp_price+" F币,请确认是否继续？"
-                })
-                .then(()=>{
-                   this.axios.post('/order/orderCourse',{
-                    uid:uid,
-                    cpid:this.$route.params.id,
-                  })
-                  .then(res=>{
-                    if(res.data.code=='200'){
-
-                      // 扣取费用
-                      this.axios.post('/vip/income',{
-                        id:uid,
-                        money:Number("-"+this.data.cp_price),
-                        msg:"课程预约",
-                      })
-                      .then(res=>{
-                        console.log(res.data);
-                        if(res.data.code=='200'){
-                          Toast.success("预约成功！");
-                          this.$router.push({path:'/home/courseHistory'});
-                        }
-                      })
-                    }
-                    else{
-                      Toast.fail(res.data.msg);
-                    }
-                  })
-                })
-                 
-              }
-
-            }
-          })
-        }
-        else{
-          Toast.fail("你已经预约过该课程了！");
-        }
+      .then(() => {
+        this.axios.post('/order/delCourseOrder',{
+          id:this.$route.params.id,
+          price:this.data.cp_price,
+          uid:uid
+        })
       })
+      .catch(() => {
+      });
     },
+
     back(){
-      this.$router.go(-1);
+      this.$router.replace({path:'/home/courseHistory'});
     },
     showTeacher(){
       this.$router.push("/home/teacherDetail/"+this.data.t_id);
@@ -183,11 +127,11 @@ export default {
       message: '加载中...',
       forbidClick: true,
     });
-    this.axios.post("/course/getPlanDetail", {
+    this.axios.post("/order/courseItem", {
       id:this.$route.params.id
     })
     .then((res) => {
-      console.log(res);
+      console.log(res.data);
       if(res.data.code=='200'){
         this.loading=false;
         this.data = res.data.data;
